@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
 const express = require('express');
 const routes = require('./routes/index');
 const userRoutes = require('./routes/users');
@@ -32,9 +36,9 @@ app.use(express.urlencoded({ extended: false }));
 
 //Express Session
 app.use(session ({
-  secret: 'secret',
-  resave: true,
-  saveUninitialized: true
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false
 }));
 
 // Passport Middleware
